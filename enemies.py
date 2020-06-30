@@ -6,63 +6,69 @@ class Enemy(ABC):
     """Abstract class for enemies."""
     damage = random.randint(5, 10)
     hp = random.randint(20, 50)
+
     @abstractmethod
     def attack(self, damage=damage):
         pass
 
 
-class Zombie(Enemy):
-    """Homeless enemy """
+class Orc(Enemy):
+    """Orc melee enemy."""
     damage = Enemy.damage
     hp = Enemy.hp
+
     def attack(self, damage: int = damage):
-        """Throwing the shit or garbage."""
-        print('Зомби кинул в вас говном')
-        return damage
+        """Melee attack of Orc."""
+        print('Орк атаковал вас в ближнем бою')
+        return damage, 'melee'
 
 
-class Alien(Enemy):
+class AngryElf(Enemy):
     """Alien enemy from UFO."""
     damage = Enemy.damage
     hp = Enemy.hp
+
     def attack(self, damage: int = damage):
-        """using laser"""
-        print('Инопланетянин стрельнул в вас лезером')
-        return damage
+        """Range attack of elf."""
+        print('Эльф стреляет в вас из лука')
+        return damage, 'range'
 
 
-class Vampire(Enemy):
+class Warlock(Enemy):
     """Vampire."""
     damage = Enemy.damage
     hp = Enemy.hp
+
     def attack(self, damage: int = damage):
-        print('Вампир чмокнул вас в шею')
-        return damage
+        print('Злой маг пульнул в вас фаербол')
+        return damage, 'spell'
 
 
 class EnemyFactory(ABC):
     """AbstractFactory of enemies."""
+
     @abstractmethod
     def create_enemy(self):
         """Creating an enemie."""
         pass
 
 
-class ZombieFactory(EnemyFactory):
+class OrcFactory(EnemyFactory):
     """Zombie factory"""
+
     def create_enemy(self):
-        return Zombie()
+        return Orc()
 
 
-class AlienFactory(EnemyFactory):
+class AngryElfFactory(EnemyFactory):
     """Alien factory"""
+
     def create_enemy(self):
-        return Alien()
+        return AngryElf()
 
 
-class VampireFactory(EnemyFactory):
+class WarlockFactory(EnemyFactory):
     """Vampire factory"""
+
     def create_enemy(self):
-        return Vampire()
-
-
+        return Warlock()

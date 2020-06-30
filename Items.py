@@ -26,6 +26,14 @@ class Bow(Item):
         return 'Bow', attack_power
 
 
+class Arrows(Item):
+    """Sword"""
+    arrows = random.randint(1, 20)
+
+    def attack(self, additional_arrows: int = arrows):
+        return additional_arrows
+
+
 class SpellBook(Item):
     """Spell Book"""
     attack_power = random.randint(1, 20)
@@ -36,17 +44,21 @@ class SpellBook(Item):
 
 class Apple(Item):
     """Healing apple"""
+
     def heal(self):
         return random.randint(1, 20)
 
 
 class Totem(Item):
     """Totem"""
+
     def save_game(self):
         pass
 
+
 class ItemFactory(ABC):
     """Abstract class for items"""
+
     def spawn_item(self):
         pass
 
@@ -78,9 +90,16 @@ class AppleFactory(ItemFactory):
     def spawn_item(self):
         return Apple()
 
+
 class TotemFactory(ItemFactory):
     """Abstract class for items"""
 
     def spawn_item(self):
         return Totem()
 
+
+class ArrowsFactory(ItemFactory):
+    """Abstract class for items"""
+
+    def spawn_item(self):
+        return Arrows()
